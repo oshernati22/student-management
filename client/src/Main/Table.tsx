@@ -10,47 +10,18 @@ import Gender from "../Assets/Icons/Icon awesome-transgender.svg";
 import City from "../Assets/Icons/Icon metro-location.svg";
 import Path from "../Assets/Icons/Path 6.svg";
 import Logo from "../Assets/Icons/fibonatix-logo.svg";
-import A from "../Assets/Avatar/Ellipse 11.png";
-import B from "../Assets/Avatar/Ellipse 10.png";
-import C from "../Assets/Avatar/Ellipse 12.png";
-import D from "../Assets/Avatar/Ellipse 13.png";
-import E from "../Assets/Avatar/Ellipse 14.png";
-import F from "../Assets/Avatar/Ellipse 15.png";
+import Avater from "./Avatar";
 
 interface TableProps {
   students?: Student[];
   setStudents?: React.Dispatch<React.SetStateAction<Student[] | undefined>>;
 }
-const getAvatar = (str: string) => {
-  if (str == "A") {
-    return A;
-  }
-  if (str == "B") {
-    return B;
-  }
-  if (str == "C") {
-    return C;
-  }
-  if (str == "D") {
-    return D;
-  }
-  if (str == "E") {
-    return E;
-  }
-  if (str == "F") {
-    return F;
-  }
-};
+
 const columns = [
   {
     field: "img",
     title: <img src={Path}></img>,
-    render: (rowData: any) => (
-      <img
-        src={getAvatar(rowData.img)}
-        style={{ width: 40, borderRadius: "50%" }}
-      />
-    ),
+    render: (rowData: any) => <Avater imgString={rowData.img} />,
   },
   { field: "name", title: <img src={Book}></img> },
   { field: "gender", title: <img src={Gender}></img> },
@@ -64,6 +35,7 @@ const columns = [
 const Table: React.FC<TableProps> = ({ students, setStudents }) => {
   const [selectedRows, setSelectedRows] = useState<Student[]>();
   const navigate = useNavigate();
+  // intial table rows
   const arr = [
     {
       id: 1,
@@ -77,13 +49,13 @@ const Table: React.FC<TableProps> = ({ students, setStudents }) => {
     },
   ];
   const [rows, setRows] = useState<Student[] | any>(arr);
-
+  // evrey time that students change set students state
   useEffect(() => {
     if (students) {
       setRows(students);
     }
   }, [students]);
-
+  //delete selected rows and update new id's
   const handleDelete = () => {
     if (setStudents && students && selectedRows) {
       const temp = students.filter(
@@ -102,6 +74,7 @@ const Table: React.FC<TableProps> = ({ students, setStudents }) => {
   return (
     <>
       <MaterialTable
+        // get selected rows
         onRowClick={(event, rowData) => {
           navigate(`students/${rowData?.id}`);
           event?.stopPropagation();

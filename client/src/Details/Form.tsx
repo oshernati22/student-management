@@ -51,7 +51,7 @@ const Form: React.FC<FormProps> = ({ student, students }) => {
       setValidateMail("Mail is not valid ");
     }
   };
-
+  //get values from form and update in local storage
   const handelSubmit = (data: any) => {
     data.preventDefault();
     if (student && students) {

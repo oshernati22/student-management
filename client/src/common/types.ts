@@ -1,4 +1,5 @@
 export interface Student {
+  //all types
   id: string;
   img: string;
   name: string;

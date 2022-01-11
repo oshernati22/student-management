@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 class Api {
+  // all rest server commends
   private static axiosInstance: AxiosInstance;
 
   static init() {

@@ -9,6 +9,7 @@ interface MainProps extends RouteComponentProps {}
 
 const Main: React.FC<MainProps> = () => {
   const [students, setStudents] = useState<Student[]>();
+  // get students from server for first time and then use storage memorey
   useEffect(() => {
     if (!localStorage.getItem("students")) {
       Api.init();
@@ -28,6 +29,7 @@ const Main: React.FC<MainProps> = () => {
 
   return (
     <>
+      {/* send states to render students from child component */}
       <Table students={students} setStudents={(value) => setStudents(value)} />
     </>
   );

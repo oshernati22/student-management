@@ -8,6 +8,7 @@ interface DetailsProps extends RouteComponentProps {
 }
 
 const Details: React.FC<DetailsProps> = ({ studentId }) => {
+  // get students from local storage and find the student that clicked
   const students = JSON.parse(
     localStorage.getItem("students") as any
   ) as Student[];
